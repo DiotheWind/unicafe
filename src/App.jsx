@@ -11,10 +11,18 @@ const App = () => {
 
   return (
     <div>
-      <h2>give feedback</h2>
-      <button onClick={addVoteToGood}>good</button>
-      <button onClick={addVoteToNeutral}>neutral</button>
-      <button onClick={addVoteToBad}>bad</button>
+      <div>
+        <h2>give feedback</h2>
+        <button onClick={addVoteToGood}>good</button>
+        <button onClick={addVoteToNeutral}>neutral</button>
+        <button onClick={addVoteToBad}>bad</button>
+      </div>
+      <div>
+        <h2>statistics</h2>
+        <p>good: {good}</p>
+        <p>neutral: {neutral}</p>
+        <p>bad: {bad}</p>
+      </div>
     </div>
   )
 }
