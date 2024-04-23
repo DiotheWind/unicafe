@@ -1,5 +1,19 @@
 import { useState } from 'react'
 
+const Statistics = (props) => {
+  return (
+    <div>
+      <h2>statistics</h2>
+      <p>good: {props.good}</p>
+      <p>neutral: {props.neutral}</p>
+      <p>bad: {props.bad}</p>
+      <p>all: {props.totalVotes}</p>
+      <p>average: {props.average}</p>
+      <p>positive: {props.positiveFeedback}%</p>
+    </div>
+  )
+}
+
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
@@ -10,6 +24,7 @@ const App = () => {
   const totalScore = score.reduce((previousScore, currentScore) => {
     return previousScore + currentScore
   }, 0)
+  const average = totalScore / totalVotes
   const positiveFeedback = (good / totalVotes) * 100
 
   const addVoteToGood = () => {
@@ -38,15 +53,8 @@ const App = () => {
         <button onClick={addVoteToNeutral}>neutral</button>
         <button onClick={addVoteToBad}>bad</button>
       </div>
-      <div>
-        <h2>statistics</h2>
-        <p>good: {good}</p>
-        <p>neutral: {neutral}</p>
-        <p>bad: {bad}</p>
-        <p>all: {totalVotes}</p>
-        <p>average: {totalScore / totalVotes}</p>
-        <p>positive: {positiveFeedback}%</p>
-      </div>
+
+      <Statistics good={good} neutral={neutral} bad={bad} totalVotes={totalVotes} average={average} positiveFeedback={positiveFeedback} />
     </div>
   )
 }
