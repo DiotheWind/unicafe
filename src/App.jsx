@@ -2,9 +2,9 @@ import { useState } from 'react'
 
 const Button = ({ onPress, text }) => {
   return (
-    <>
+    <div>
       <button onClick={onPress}>{text}</button>
-    </>
+    </div>
   )
 }
 
@@ -12,7 +12,6 @@ const Statistics = (props) => {
   if (props.score.length === 0) {
     return (
       <div>
-        <h2>statistics</h2>
         <p>No feedback given</p>
       </div>
     )
@@ -20,14 +19,21 @@ const Statistics = (props) => {
 
   return (
     <div>
-      <h2>statistics</h2>
-      <p>good: {props.good}</p>
-      <p>neutral: {props.neutral}</p>
-      <p>bad: {props.bad}</p>
-      <p>all: {props.totalVotes}</p>
-      <p>average: {props.average}</p>
-      <p>positive: {props.positiveFeedback}%</p>
+      <StatisticLine text="good" value={props.good}/>
+      <StatisticLine text="neutral" value={props.neutral}/>
+      <StatisticLine text="bad" value={props.bad}/>
+      <StatisticLine text="all" value={props.totalVotes}/>
+      <StatisticLine text="average" value={props.average}/>
+      <StatisticLine text="positive" value={props.positiveFeedback}/>
     </div>
+  )
+}
+
+const StatisticLine = ({ text, value }) => {
+  return (
+    <>
+      <p>{text}: {value}</p>
+    </>
   )
 }
 
@@ -42,7 +48,7 @@ const App = () => {
     return previousScore + currentScore
   }, 0)
   const average = totalScore / totalVotes
-  const positiveFeedback = (good / totalVotes) * 100
+  const positiveFeedback = ((good / totalVotes) * 100).toString() + "%"
 
   const addVoteToGood = () => {
     setGood(good + 1)
@@ -71,6 +77,7 @@ const App = () => {
         <Button onPress={addVoteToBad} text='bad' />
       </div>
 
+      <h2>statistics</h2>
       <Statistics good={good} neutral={neutral} bad={bad} score={score} totalVotes={totalVotes} average={average} positiveFeedback={positiveFeedback} />
     </div>
   )
